@@ -12,6 +12,8 @@
 #define OTA_UPDATE_SUCCESSFUL	1
 #define OTA_UPDATE_FAILED		-1
 
+#define MAXIMUM_AP 10
+
 /**
  * Connection status for Wifi
  */
@@ -21,6 +23,7 @@ typedef enum http_server_wifi_connect_status
 	HTTP_WIFI_STATUS_CONNECTING,
 	HTTP_WIFI_STATUS_CONNECT_FAILED,
 	HTTP_WIFI_STATUS_CONNECT_SUCCESS,
+	HTTP_WIFI_STATUS_DISCONNECTED,
 } http_server_wifi_connect_status_e;
 
 /**
@@ -31,8 +34,10 @@ typedef enum http_server_message
 	HTTP_MSG_WIFI_CONNECT_INIT = 0,
 	HTTP_MSG_WIFI_CONNECT_SUCCESS,
 	HTTP_MSG_WIFI_CONNECT_FAIL,
+	HTTP_MSG_WIFI_USER_DISCONNECT,
 	HTTP_MSG_OTA_UPDATE_SUCCESSFUL,
 	HTTP_MSG_OTA_UPDATE_FAILED,
+	HTTP_MSG_TIME_SERVICE_INITIALIZED,
 } http_server_message_e;
 
 /**
@@ -60,6 +65,7 @@ void http_server_start(void);
  * Stops the HTTP server.
  */
 void http_server_stop(void);
+void clock_init(void);
 
 /**
  * Timer callback function which calls esp_restart upon successful firmware update.
